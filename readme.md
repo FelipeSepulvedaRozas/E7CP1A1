@@ -13,7 +13,7 @@
 1. Dado el siguiente hash:
 
     ~~~
-    h = { :claveuno => 10, :clavedos => 20, :clavetres => 30 }
+    h = { "claveuno" => 10, "clavedos" => 20, "clavetres" => 30 }
     ~~~
 
     Modificar el hash para utilizar la sintaxis de Ruby 2.0+
@@ -28,7 +28,7 @@
     y se realiza la siguiente consulta para conocer los productos existentes:
 
     ~~~
-    Productos.each { |valor, producto| puts producto }
+    productos.each { |valor, producto| puts "#{valor}=#{producto}" }
     ~~~
 
     Corrige el error para mostrar la información solicitada.
@@ -36,7 +36,7 @@
 2. Se quiere agregar un nuevo producto al hash:
 
     ~~~
-    producto[2200] = cereal
+    productos['cereal'] = 2200 
     ~~~
     
 	Corrige la instrucción para agregar el producto.
@@ -44,14 +44,17 @@
 3. Se quiere actualizar el precio de la bebida:
 
 	~~~
-   producto[:bebida] = 2000
+   productos['bebida'] = 2000
    ~~~
     
     Corrige la instrucción para actualizar el valor del producto existente.
 
 4. Convertir el hash en un array y guardarlo en una nueva variable.
 
+     array=productos.to_a
+
 5. Eliminar el producto 'galletas' del hash.
+    productos.delete('galletas')
 
 ## Ejercicio 3: Operaciones básicas
 
@@ -62,9 +65,13 @@ h = {"x": 1, "y":2}
 ~~~
 
 - Agregar el string z con el valor 3.
+    h['z']= 3
 - Cambiar el valor de x por 5.
+    h[:x]= 5
 - Eliminar la clave y.
+     h.delete(:y)
 - Si el hash tiene una clave llamada z mostrar en pantalla "yeeah".
+    puts 'yeahh' if h.has_key?('z')
 - Invertir el diccionario de forma que los valores sean las llaves y las llaves los valores
 	- Ejemplo:
 	
@@ -76,7 +83,9 @@ h = {"x": 1, "y":2}
     ~~~rb
     x = {"hola": "a"}
     ~~~
+        invertido=h.invert
 
+         puts invertido
 ## Ejercicio 4: Array y Hashes
 
 Se tienen dos arrays uno con el nombre de personas y otro con las edades, se pide generar un hash con el nombre y edad de cada persona (se asume que no existen dos personas con el mismo nombre)
@@ -84,7 +93,7 @@ Se tienen dos arrays uno con el nombre de personas y otro con las edades, se pid
 ~~~
 personas = ["Carolina", "Alejandro", "Maria Jesús", "Valentín"]
 edades = [32, 28, 41, 19]
-~~~
+~~~            personas_hash = Hash[personas.zip edades]
 
 1. Se pide generar un hash con la información:
 
@@ -93,6 +102,11 @@ edades = [32, 28, 41, 19]
 	~~~
 
 2. Crear un método que reciba el hash y devuelva el promedio de las edades del hash pasado como argumento.
+        def imprimir(hash)
+    hash.each {|key, value| puts "#{key} = #{value}"}
+end
+
+imprimir(h)
 
 ## Ejercicio 5: Array y Hashes
 
@@ -107,12 +121,14 @@ Generar un hash que contenga los meses como llave y las ventas como valor:
 
 ~~~ruby
 h = {'Enero': 2000, 'Febrero': 3000 ... }
-~~~
+~~~ventas = Hash[meses.zip ventas]
 
 En base al hash generado:
 
 1.  Invertir las llaves y los valores del hash.
+    invertido=ventas.invert
 2.  Obtener el mes mayor cantidad de ventas (a partir del hash invertido.)
+    puts invertido[invertido.keys.max]
 
 ## Ejercicio 6: Operaciones típicas sobre un hash
 Escribir un hash con el menu de un restaurant, la llave es el nombre del plato y el valor es el precio de este.
@@ -122,11 +138,18 @@ restaurant_menu = { "Ramen" => 3, "Dal Makhani" => 4, "Coffee" => 2 }
 ~~~
 
 1. Obtener el plato mas caro.
+    puts restaurant_menu.values.max
 2. Obtener el plato mas barato.
+    puts restaurant_menu.values.min
 3. Sacar el promedio del valor de los platos.
+
+
 4. Crear un arreglo con solo los nombres de los platos.
+
 5. Crear un arreglo con solo los valores de los platos.
+
 6. Modificar el hash y agregar el IVA a los valores de los platos (multiplicar por 1.19).
+
 7. Dar descuento del 20% para los platos que tengan un nombre de más 1 una palabra.
 
 ## Ejercicio 7: Ejercicio completo con un hash
